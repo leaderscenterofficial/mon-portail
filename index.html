@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -77,11 +76,12 @@
 
 <script>
   function showForm(type) {
-    // On charge un formulaire spécifique selon le bouton
     fetch(`https://script.google.com/macros/s/TON_SCRIPT_ID/exec?type=${type}`)
       .then(res => res.text())
       .then(html => {
-        document.getElementById('formContainer').innerHTML = html;
+        // Extraire uniquement le contenu du <body>
+        const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+        document.getElementById('formContainer').innerHTML = bodyMatch ? bodyMatch[1] : html;
       })
       .catch(err => {
         console.error('Erreur:', err);
@@ -89,96 +89,4 @@
   }
 </script>
 </body>
-=======
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Leaders Center - Portail</title>
-<style>
-  body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f9;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  header {
-    margin-top: 50px;
-    text-align: center;
-  }
-
-  h1 {
-    font-size: 2.5em;
-    color: #333;
-  }
-
-  /* Menu styling */
-  .menu {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-top: 30px;
-    justify-content: center;
-  }
-
-  button {
-    background-color: #007bff;
-    border: none;
-    padding: 15px 30px;
-    font-size: 1em;
-    border-radius: 8px;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-
-  button:hover {
-    background-color: #0056b3;
-  }
-
-  /* Responsive */
-  @media(max-width: 600px) {
-    button {
-      width: 80%;
-      font-size: 1.2em;
-    }
-  }
-</style>
-</head>
-<body>
-<header>
-  <h1>Leaders Center</h1>
-</header>
-<div class="menu">
-  <button onclick="showForm('inscription')">Inscription</button>
-  <button onclick="showForm('absence_primaire')">Absence Primaire</button>
-  <button onclick="showForm('absence_college')">Absence Collège</button>
-  <button onclick="showForm('absence_lycée')">Absence Lycée</button>
-  <button onclick="showForm('absence_adulte')">Absence Adulte</button>
-  <button onclick="showForm('professeur')">Professeur</button>
-</div>
-
-<!-- Zone de formulaire -->
-<div id="formContainer" style="margin-top:40px; width:80%; max-width:600px;"></div>
-
-<script>
-  function showForm(type) {
-    // On charge un formulaire spécifique selon le bouton
-    fetch(`https://script.google.com/macros/s/TON_SCRIPT_ID/exec?type=${type}`)
-      .then(res => res.text())
-      .then(html => {
-        document.getElementById('formContainer').innerHTML = html;
-      })
-      .catch(err => {
-        console.error('Erreur:', err);
-      });
-  }
-</script>
-</body>
->>>>>>> 4a53f8d1211b828c40ba5fc42c1fefb8a4d2e043
 </html>
