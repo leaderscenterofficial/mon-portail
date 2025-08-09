@@ -10,12 +10,15 @@
     <label>Nom :<br>
       <input type="text" name="nom" required>
     </label><br><br>
+
     <label>Prénom :<br>
       <input type="text" name="prenom" required>
     </label><br><br>
+
     <label>Âge :<br>
-      <input type="date" name="Date de naissance" required>
+      <input type="date" name="age" required>
     </label><br><br>
+
     <label>Niveau scolaire :<br>
       <select name="niveau" required>
         <option value="">Sélectionner</option>
@@ -37,6 +40,7 @@
         <option>Autre</option>
       </select>
     </label><br><br>
+
     <label>Matières (plusieurs choix possibles) :<br>
       <select name="matieres" multiple size="6" required>
         <option>Maths</option>
@@ -49,12 +53,41 @@
         <option>Arabe</option>
         <option>Education islamique</option>
         <option>Hist-geo</option>
-        <option>philosophie</option>
-        <option>concours Etu-sup</option>
-        <option>calcul mental</option>
+        <option>Philosophie</option>
+        <option>Concours Etu-sup</option>
+        <option>Calcul mental</option>
       </select>
     </label><br><br>
+
     <button type="submit">Envoyer</button>
+    <div id="message"></div>
   </form>
+
+  <script>
+    document.getElementById("inscriptionForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const form = this;
+      const formData = new FormData(form);
+      const params = new URLSearchParams(formData);
+
+      fetch("https://script.google.com/macros/s/TON_ID_SCRIPT/exec", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: params
+      })
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("message").textContent = "✅ Inscription réussie !";
+        form.reset();
+      })
+      .catch(error => {
+        document.getElementById("message").textContent = "❌ Erreur lors de l'envoi.";
+        console.error(error);
+      });
+    });
+  </script>
 </body>
 </html>
