@@ -13,8 +13,8 @@
     }
 
     .container {
-      max-width: 600px;
-      margin: 50px auto;
+      max-width: 700px;
+      margin: 40px auto;
       background: #ffffff;
       padding: 30px;
       border-radius: 12px;
@@ -24,7 +24,7 @@
     h2 {
       text-align: center;
       color: #2c3e50;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
     }
 
     label {
@@ -34,7 +34,7 @@
       color: #34495e;
     }
 
-    input, select, textarea {
+    input, select {
       width: 100%;
       padding: 10px;
       margin-top: 5px;
@@ -47,8 +47,14 @@
       height: auto;
     }
 
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
     button {
-      margin-top: 25px;
+      margin-top: 30px;
       width: 100%;
       padding: 12px;
       background-color: #2980b9;
@@ -75,11 +81,14 @@
   <div class="container">
     <h2>Formulaire d'inscription</h2>
     <form id="inscriptionForm" onsubmit="handleSubmit(event)">
-      <label for="nom">Nom complet :</label>
+      <label for="nom">Nom :</label>
       <input type="text" id="nom" name="nom" required />
 
-      <label for="email">Adresse e-mail :</label>
-      <input type="email" id="email" name="email" required />
+      <label for="prenom">Prénom :</label>
+      <input type="text" id="prenom" name="prenom" required />
+
+      <label for="dob">Date de naissance :</label>
+      <input type="date" id="dob" name="dob" required />
 
       <label for="niveau">Niveau scolaire :</label>
       <select id="niveau" name="niveau" required>
@@ -104,7 +113,7 @@
         <option>Autre</option>
       </select>
 
-      <label for="matieres">Matières souhaitées :</label>
+      <label for="matieres">Matières :</label>
       <select id="matieres" name="matieres" multiple size="6" required>
         <option>Maths</option>
         <option>SVT</option>
@@ -123,8 +132,30 @@
       </select>
       <div class="note">Maintenez Ctrl (Windows) ou Cmd (Mac) pour sélectionner plusieurs matières.</div>
 
-      <label for="message">Message (optionnel) :</label>
-      <textarea id="message" name="message" rows="4"></textarea>
+      <label for="prix_initial">Prix initial :</label>
+      <input type="number" id="prix_initial" name="prix_initial" required />
+
+      <label for="remise">Remise :</label>
+      <input type="number" id="remise" name="remise" required />
+
+      <label for="prix_final">Prix final :</label>
+      <input type="number" id="prix_final" name="prix_final" required />
+
+      <label>Paiements mensuels :</label>
+      <div class="grid">
+        <input type="number" name="Janvier" placeholder="Janvier" />
+        <input type="number" name="Février" placeholder="Février" />
+        <input type="number" name="Mars" placeholder="Mars" />
+        <input type="number" name="Avril" placeholder="Avril" />
+        <input type="number" name="Mai" placeholder="Mai" />
+        <input type="number" name="Juin" placeholder="Juin" />
+        <input type="number" name="Juillet" placeholder="Juillet" />
+        <input type="number" name="Août" placeholder="Août" />
+        <input type="number" name="Septembre" placeholder="Septembre" />
+        <input type="number" name="Octobre" placeholder="Octobre" />
+        <input type="number" name="Novembre" placeholder="Novembre" />
+        <input type="number" name="Décembre" placeholder="Décembre" />
+      </div>
 
       <button type="submit">Envoyer</button>
     </form>
@@ -146,7 +177,7 @@
       hiddenInput.value = selectedMatieres;
       form.appendChild(hiddenInput);
 
-      // Ici tu peux ajouter l'envoi vers Google Sheets ou Apps Script
+      // Ajoute ici ton code d'envoi vers Google Sheets ou Apps Script
       console.log("Formulaire prêt à être envoyé !");
       form.submit();
     }
