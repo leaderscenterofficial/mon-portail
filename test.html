@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Test Web App</title>
+</head>
+<body>
+  <h2>Test d'envoi vers Google Sheets</h2>
+  <form id="testForm">
+    <label>Nom :</label>
+    <input type="text" name="nom" required><br><br>
+
+    <label>Message :</label>
+    <input type="text" name="message" required><br><br>
+
+    <button type="submit">Envoyer</button>
+  </form>
+
+  <script>
+    document.getElementById("testForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const formData = new FormData(event.target);
+
+      fetch("TON_URL_WEB_APP", {
+        method: "POST",
+        body: formData
+      })
+      .then(response => response.text())
+      .then(data => {
+        alert(data);
+      })
+      .catch(error => {
+        console.error("Erreur :", error);
+        alert("❌ Échec de l'envoi.");
+      });
+    });
+  </script>
+</body>
+</html>
