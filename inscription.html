@@ -178,49 +178,56 @@
       <button type="submit">Envoyer</button>
     </form>
   </div>
+<!-- ... tout le code HTML reste identique ... -->
 
-  <script>
-    const prixInitialInput = document.getElementById("prix_initial");
-    const remiseInput = document.getElementById("remise");
-    const prixFinalInput = document.getElementById("prix_final");
+<script>
+  const prixInitialInput = document.getElementById("prix_initial");
+  const remiseInput = document.getElementById("remise");
+  const prixFinalInput = document.getElementById("prix_final");
 
-    function calculerPrixFinal() {
-      const prixInitial = parseFloat(prixInitialInput.value) || 0;
-      const remisePourcent = parseFloat(remiseInput.value) || 0;
-      const remiseMontant = prixInitial * (remisePourcent / 100);
-      const prixFinal = prixInitial - remiseMontant;
-      prixFinalInput.value = prixFinal > 0 ? prixFinal.toFixed(2) : "0.00";
-    }
+  function calculerPrixFinal() {
+    const prixInitial = parseFloat(prixInitialInput.value) || 0;
+    const remisePourcent = parseFloat(remiseInput.value) || 0;
+    const remiseMontant = prixInitial * (remisePourcent / 100);
+    const prixFinal = prixInitial - remiseMontant;
+    prixFinalInput.value = prixFinal > 0 ? prixFinal.toFixed(2) : "0.00";
+  }
 
-    prixInitialInput.addEventListener("input", calculerPrixFinal);
-    remiseInput.addEventListener("input", calculerPrixFinal);
+  prixInitialInput.addEventListener("input", calculerPrixFinal);
+  remiseInput.addEventListener("input", calculerPrixFinal);
 
-    document.getElementById("inscriptionForm").addEventListener("submit", function(event) {
-      event.preventDefault();
-      const form = event.target;
-      const formData = new FormData(form);
+  document.getElementById("inscriptionForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    const form = event.target;
+    const formData = new FormData(form);
 
-      const matieresSelect = document.getElementById("matieres");
-      const selectedMatieres = Array.from(matieresSelect.selectedOptions)
-        .map(opt => opt.value)
-        .join(", ");
-      formData.append("matieres_concat", selectedMatieres);
+    const matieresSelect = document.getElementById("matieres");
+    const selectedMatieres = Array.from(matieresSelect.selectedOptions)
+      .map(opt => opt.value)
+      .join(", ");
+    formData.append("matieres_concat", selectedMatieres);
 
-      fetch("https://script.google.com/macros/s/AKfycbzTKd0eSzSQzBmeKNhCe4Cfxq2e75ArfJY6tIl0hes-1TWFcN15jBd86RSHksU5afMjUA/exec", {
-        method: "POST",
-        body: formData
-      })
-      .then(response => response.text())
-      .then(data => {
-        alert(data);
-        form.reset();
-        prixFinalInput.value = "";
-      })
-      .catch(error => {
-        console.error("Erreur :", error);
-        alert("❌ Une erreur est survenue.");
-      });
+    // ✅ Ajout manuel du champ prix_final
+    formData.append("prix_final", prixFinalInput.value);
+
+    fetch("https://script.google.com/macros/s/AKfycbzTKd0eSzSQzBmeKNhCe4Cfxq2e75ArfJY6tIl0hes-1TWFcN15jBd86RSHksU5afMjUA/exec", {
+      method: "POST",
+      body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+      alert(data);
+      form.reset();
+      prixFinalInput.value = "";
+    })
+    .catch(error => {
+      console.error("Erreur :", error);
+      alert("❌ Une erreur est survenue.");
     });
-  </script>
+  });
+</script>
+
+
+  
 </body>
 </html>
