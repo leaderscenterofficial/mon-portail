@@ -33,7 +33,7 @@
       justify-content: center;
     }
 
-    button {
+    .btn {
       background-color: #007bff;
       border: none;
       padding: 15px 30px;
@@ -41,17 +41,20 @@
       border-radius: 8px;
       color: #fff;
       cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
       transition: background-color 0.3s;
     }
 
-    button:hover {
+    .btn:hover {
       background-color: #0056b3;
     }
 
     @media(max-width: 600px) {
-      button {
+      .btn {
         width: 80%;
         font-size: 1.2em;
+        text-align: center;
       }
     }
   </style>
@@ -62,12 +65,12 @@
   </header>
 
   <div class="menu">
-    <button onclick="window.location.href='inscription.html'">Inscription</button>
-    <button onclick="showForm('absence_primaire')">Absence Primaire</button>
-    <button onclick="showForm('absence_college')">Absence Collège</button>
-    <button onclick="showForm('absence_lycée')">Absence Lycée</button>
-    <button onclick="showForm('absence_adulte')">Absence Adulte</button>
-    <button onclick="showForm('professeur')">Professeur</button>
+    <a href="inscription.html" target="_blank" class="btn">Inscription</a>
+    <button class="btn" onclick="showForm('absence_primaire')">Absence Primaire</button>
+    <button class="btn" onclick="showForm('absence_college')">Absence Collège</button>
+    <button class="btn" onclick="showForm('absence_lycée')">Absence Lycée</button>
+    <button class="btn" onclick="showForm('absence_adulte')">Absence Adulte</button>
+    <button class="btn" onclick="showForm('professeur')">Professeur</button>
   </div>
 
   <!-- Zone de formulaire -->
