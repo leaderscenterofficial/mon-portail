@@ -101,3 +101,38 @@
                 <option>2AC</option>
                 <option>3AC</option>
                 <option>TC</option>
+                <option>1Bac</option>
+                <option>2Bac</option>
+                <option>Supérieur</option>
+                <option>employé</option>
+                <option>Free</option>
+                <option>Autre</option>
+              </select>
+            </label><br><br>
+            <label>Matières (plusieurs choix possibles) :<br>
+              <select name="matieres" multiple size="6" required>
+                <option>Maths</option>
+                <option>SVT</option>
+                <option>PC</option>
+                <option>Français</option>
+                <option>Anglais</option>
+                <option>Summer Camp</option>
+                <option>Echec</option>
+                <option>Arabe</option>
+                <option>Education islamique</option>
+                <option>Hist-geo</option>
+                <option>philosophie</option>
+                <option>concours Etu-sup</option>
+                <option>calcul mental</option>
+              </select>
+            </label><br><br>
+            <button type="submit">Envoyer</button>
+          </form>
+        `;
+      } else {
+        document.getElementById('formContainer').innerHTML = "";
+      }
+    }
+  </script>
+</body>
+</html>
