@@ -2,36 +2,91 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Test Web App</title>
+  <title>Formulaire Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 40px;
+      max-width: 500px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      color: #0077cc;
+    }
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #005fa3;
+    }
+    .success {
+      margin-top: 20px;
+      color: green;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-  <h2>Test d'envoi vers Google Sheets</h2>
-  <form id="testForm">
-    <label>Nom :</label>
-    <input type="text" name="nom" required><br><br>
+  <h1>Formulaire Test</h1>
+  <form id="form">
+    <label for="nom">Nom :</label>
+    <input type="text" name="nom" id="nom" required>
 
-    <label>Message :</label>
-    <input type="text" name="message" required><br><br>
+    <label for="message">Message :</label>
+    <input type="text" name="message" id="message" required>
 
     <button type="submit">Envoyer</button>
   </form>
 
-  <script>
-    document.getElementById("testForm").addEventListener("submit", function(event) {
-      event.preventDefault();
-      const formData = new FormData(event.target);
+  <div class="success" id="successMsg"></div>
 
-      fetch("TON_URL_WEB_APP", {
+  <script>
+    const form = document.getElementById('form');
+    const successMsg = document.getElementById('successMsg');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const data = new FormData(form);
+      fetch("https://script.google.com/macros/s/TON_URL_DU_SCRIPT/exec", {
         method: "POST",
-        body: formData
+        body: data
       })
       .then(response => response.text())
-      .then(data => {
-        alert(data);
+      .then(text => {
+        successMsg.textContent = "✅ Données envoyées avec succès !";
+        form.reset();
       })
       .catch(error => {
-        console.error("Erreur :", error);
-        alert("❌ Échec de l'envoi.");
+        successMsg.textContent = "❌ Erreur lors de l'envoi.";
+        console.error(error);
       });
     });
   </script>
