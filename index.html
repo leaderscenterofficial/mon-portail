@@ -1,145 +1,144 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Leaders Center - Portail</title>
+  <meta charset="UTF-8">
+  <title>Inscription - Arbre Vivant</title>
   <style>
     body {
-      font-family: 'Arial', sans-serif;
+      font-family: Arial, sans-serif;
       background-color: #f4f4f9;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
     }
 
-    header {
-      margin-top: 50px;
+    h2 {
       text-align: center;
-    }
-
-    h1 {
-      font-size: 2.5em;
       color: #333;
     }
 
-    .menu {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      margin-top: 30px;
-      justify-content: center;
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
     }
 
-    .btn {
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px;
       background-color: #007bff;
+      color: white;
       border: none;
-      padding: 15px 30px;
-      font-size: 1em;
-      border-radius: 8px;
-      color: #fff;
+      border-radius: 5px;
       cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-      transition: background-color 0.3s;
+      width: 100%;
+      font-size: 1em;
     }
 
-    .btn:hover {
+    button:hover {
       background-color: #0056b3;
     }
 
-    @media(max-width: 600px) {
-      .btn {
-        width: 80%;
-        font-size: 1.2em;
-        text-align: center;
-      }
+    .message {
+      margin-top: 20px;
+      text-align: center;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Leaders Center</h1>
-  </header>
+  <h2>Formulaire d'inscription</h2>
+  <form id="inscriptionForm">
+    <label>Nom :
+      <input type="text" name="nom" required>
+    </label>
 
-  <div class="menu">
-    <a href="inscription.html" target="_blank" class="btn">Inscription</a>
-    <button class="btn" onclick="showForm('absence_primaire')">Absence Primaire</button>
-    <button class="btn" onclick="showForm('absence_college')">Absence Collège</button>
-    <button class="btn" onclick="showForm('absence_lycée')">Absence Lycée</button>
-    <button class="btn" onclick="showForm('absence_adulte')">Absence Adulte</button>
-    <button class="btn" onclick="showForm('professeur')">Professeur</button>
-  </div>
+    <label>Prénom :
+      <input type="text" name="prenom" required>
+    </label>
 
-  <!-- Zone de formulaire -->
-  <div id="formContainer" style="margin-top:40px; width:80%; max-width:600px;"></div>
+    <label>Âge :
+      <input type="date" name="age" required>
+    </label>
+
+    <label>Niveau scolaire :
+      <select name="niveau" required>
+        <option value="">Sélectionner</option>
+        <option>1AP</option>
+        <option>2AP</option>
+        <option>3AP</option>
+        <option>4AP</option>
+        <option>5AP</option>
+        <option>6AP</option>
+        <option>1AC</option>
+        <option>2AC</option>
+        <option>3AC</option>
+        <option>TC</option>
+        <option>1Bac</option>
+        <option>2Bac</option>
+        <option>Supérieur</option>
+        <option>employé</option>
+        <option>Free</option>
+        <option>Autre</option>
+      </select>
+    </label>
+
+    <label>Matières :
+      <select name="matieres" multiple size="5" required>
+        <option>Maths</option>
+        <option>SVT</option>
+        <option>PC</option>
+        <option>Français</option>
+        <option>Anglais</option>
+        <option>Summer Camp</option>
+        <option>Echec</option>
+        <option>Arabe</option>
+        <option>Education islamique</option>
+        <option>Hist-geo</option>
+        <option>Philosophie</option>
+        <option>Concours Etu-sup</option>
+        <option>Calcul mental</option>
+      </select>
+    </label>
+
+    <button type="submit">Envoyer</button>
+    <div class="message" id="message"></div>
+  </form>
 
   <script>
-    function showForm(type) {
-      if (type === "inscription") {
-        document.getElementById('formContainer').innerHTML = `
-          <h2>Formulaire d'inscription</h2>
-          
+    document.getElementById("inscriptionForm").addEventListener("submit", function(e) {
+      e.preventDefault();
 
+      const form = this;
+      const formData = new FormData(form);
+      const params = new URLSearchParams();
 
-<form id="inscriptionForm">
-  <label>Nom :<br>
-    <input type="text" name="nom" required>
-  </label><br><br>
-  <label>Prénom :<br>
-    <input type="text" name="prenom" required>
-  </label><br><br>
-  <label>Âge :<br>
-    <input type="date" name="Date de naissance" required>
-  </label><br><br>
-  <label>Niveau scolaire :<br>
-    <select name="niveau" required>
-      <option value="">Sélectionner</option>
-      <option>1AP</option>
-      <option>2AP</option>
-      <!-- autres options -->
-    </select>
-  </label><br><br>
-  <label>Matières :<br>
-    <select name="matieres" multiple required>
-      <option>Maths</option>
-      <option>SVT</option>
-      <!-- autres options -->
-    </select>
-  </label><br><br>
-  <button type="submit">Envoyer</button>
-</form>
+      for (const [key, value] of formData.entries()) {
+        params.append(key, value);
+      }
 
-<script>
-  document.getElementById("inscriptionForm").addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    const formData = new FormData(this);
-    const params = new URLSearchParams();
-
-    for (const [key, value] of formData.entries()) {
-      params.append(key, value);
-    }
-
-    fetch("https://script.google.com/macros/s/AKfycbzTKd0eSzSQzBmeKNhCe4Cfxq2e75ArfJY6tIl0hes-1TWFcN15jBd86RSHksU5afMjUA/exec", {
-      method: "POST",
-      body: params
-    })
-    .then(response => response.text())
-    .then(data => {
-      alert("Inscription réussie !");
-      this.reset();
-    })
-    .catch(error => {
-      alert("Erreur lors de l'envoi.");
-      console.error(error);
+      fetch("https://script.google.com/macros/s/AKfycbzTKd0eSzSQzBmeKNhCe4Cfxq2e75ArfJY6tIl0hes-1TWFcN15jBd86RSHksU5afMjUA/exec", {
+        method: "POST",
+        body: params
+      })
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("message").textContent = "✅ Inscription réussie !";
+        form.reset();
+      })
+      .catch(error => {
+        document.getElementById("message").textContent = "❌ Erreur lors de l'envoi.";
+        console.error(error);
+      });
     });
-  });
-</script>
-
-
+  </script>
 </body>
 </html>
