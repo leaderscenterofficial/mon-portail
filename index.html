@@ -1,75 +1,25 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Inscription - Arbre Vivant</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f9;
-      padding: 20px;
-      max-width: 600px;
-      margin: auto;
-    }
-
-    h2 {
-      text-align: center;
-      color: #333;
-    }
-
-    label {
-      display: block;
-      margin-top: 15px;
-      font-weight: bold;
-    }
-
-    input, select {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-
-    button {
-      margin-top: 20px;
-      padding: 12px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      width: 100%;
-      font-size: 1em;
-    }
-
-    button:hover {
-      background-color: #0056b3;
-    }
-
-    .message {
-      margin-top: 20px;
-      text-align: center;
-      font-weight: bold;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <title>Inscription - Leaders Center</title>
 </head>
 <body>
   <h2>Formulaire d'inscription</h2>
   <form id="inscriptionForm">
-    <label>Nom :
+    <label>Nom :<br>
       <input type="text" name="nom" required>
-    </label>
+    </label><br><br>
 
-    <label>Prénom :
+    <label>Prénom :<br>
       <input type="text" name="prenom" required>
-    </label>
+    </label><br><br>
 
-    <label>Âge :
+    <label>Âge :<br>
       <input type="date" name="age" required>
-    </label>
+    </label><br><br>
 
-    <label>Niveau scolaire :
+    <label>Niveau scolaire :<br>
       <select name="niveau" required>
         <option value="">Sélectionner</option>
         <option>1AP</option>
@@ -89,10 +39,10 @@
         <option>Free</option>
         <option>Autre</option>
       </select>
-    </label>
+    </label><br><br>
 
-    <label>Matières :
-      <select name="matieres" multiple size="5" required>
+    <label>Matières (plusieurs choix possibles) :<br>
+      <select name="matieres" multiple size="6" required>
         <option>Maths</option>
         <option>SVT</option>
         <option>PC</option>
@@ -107,10 +57,10 @@
         <option>Concours Etu-sup</option>
         <option>Calcul mental</option>
       </select>
-    </label>
+    </label><br><br>
 
     <button type="submit">Envoyer</button>
-    <div class="message" id="message"></div>
+    <div id="message"></div>
   </form>
 
   <script>
@@ -121,8 +71,7 @@
       const formData = new FormData(form);
       const params = new URLSearchParams(formData);
 
-      fetch("https://script.google.com/macros/s/AKfycbzTKd0eSzSQzBmeKNhCe4Cfxq2e75ArfJY6tIl0hes-1TWFcN15jBd86RSHksU5afMjUA/exec
-", {
+      fetch("https://script.google.com/macros/s/AKfycbzTKd0eSzSQzBmeKNhCe4Cfxq2e75ArfJY6tIl0hes-1TWFcN15jBd86RSHksU5afMjUA/exec", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
