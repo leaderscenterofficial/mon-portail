@@ -1,164 +1,70 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <title>Inscription - Leaders Center</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #f0f4f8, #d9e2ec);
-      margin: 0;
-      padding: 40px;
-      color: #333;
-    }
-
-    .container {
-      max-width: 800px;
-      margin: auto;
-      background: #fff;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.1);
-    }
-
-    h2 {
-      text-align: center;
-      color: #2a4d69;
-      margin-bottom: 30px;
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 6px;
-      color: #2a4d69;
-    }
-
-    input, select {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 16px;
-    }
-
-    .mois-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-    }
-
-    .mois-item {
-      background: #f7f9fc;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #dfe3e8;
-    }
-
-    button {
-      background-color: #2a4d69;
-      color: white;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
-      width: 100%;
-      margin-top: 20px;
-      transition: background-color 0.3s ease;
-    }
-
-    button:hover {
-      background-color: #1e3a56;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
+<html>
+  <head>
+    <base target="_top">
+    <style>
+      body { font-family: Arial, sans-serif; padding: 20px; }
+      label { display: block; margin-top: 10px; font-weight: bold; }
+      select { margin-bottom: 10px; }
+    </style>
+  </head>
+  <body>
     <h2>Formulaire d'inscription</h2>
     <form id="form-inscription">
-      <div class="form-group">
-        <label>Nom</label>
-        <input type="text" name="nom" required>
-      </div>
+      <label>Nom:</label>
+      <input type="text" name="nom" required>
 
-      <div class="form-group">
-        <label>Prénom</label>
-        <input type="text" name="prenom" required>
-      </div>
+      <label>Prénom:</label>
+      <input type="text" name="prenom" required>
 
-      <div class="form-group">
-        <label>Date de naissance</label>
-        <input type="date" name="date_naissance" required>
-      </div>
+      <label>Date de naissance:</label>
+      <input type="date" name="date_naissance" required>
 
-      <div class="form-group">
-        <label>Niveau scolaire</label>
-        <input type="text" name="niveau" required>
-      </div>
+      <label>Niveau scolaire:</label>
+      <input type="text" name="niveau" required>
 
-      <div class="form-group">
-        <label>Matières</label>
-        <input type="text" name="matieres_concat" required>
-      </div>
+      <label>Matières:</label>
+      <input type="text" name="matieres_concat" required>
 
-      <div class="form-group">
-        <label>Prix initial</label>
-        <input type="number" name="prix_initial" required>
-      </div>
+      <label>Prix initial:</label>
+      <input type="number" name="prix_initial" required>
 
-      <div class="form-group">
-        <label>Remise</label>
-        <input type="number" name="remise">
-      </div>
+      <label>Remise:</label>
+      <input type="number" name="remise">
 
-      <div class="form-group">
-        <label>Prix final</label>
-        <input type="number" name="prix_final" required>
-      </div>
+      <label>Prix final:</label>
+      <input type="number" name="prix_final" required>
 
-      <h3 style="margin-top: 30px; color:#2a4d69;">Suivi des paiements mensuels</h3>
-      <div class="mois-grid">
-        <script>
-          const mois = [
-            "janvier", "fevrier", "mars", "avril", "mai", "juin",
-            "juillet", "aout", "septembre", "octobre", "novembre", "decembre"
-          ];
-          mois.forEach(m => {
-            document.write(`
-              <div class="mois-item">
-                <label>${m.charAt(0).toUpperCase() + m.slice(1)}</label>
-                <select name="mois_${m}">
-                  <option value="Non payé">Non payé</option>
-                  <option value="Payé">Payé</option>
-                </select>
-              </div>
-            `);
-          });
-        </script>
-      </div>
+      <h3>Suivi des paiements mensuels</h3>
+      <script>
+        const mois = [
+          "janvier", "fevrier", "mars", "avril", "mai", "juin",
+          "juillet", "aout", "septembre", "octobre", "novembre", "decembre"
+        ];
+        mois.forEach(m => {
+          document.write(`<label>${m.charAt(0).toUpperCase() + m.slice(1)}:</label>`);
+          document.write(`<select name="mois_${m}">
+            <option value="Non payé">Non payé</option>
+            <option value="Payé">Payé</option>
+          </select>`);
+        });
+      </script>
 
-      <button type="submit">📩 Envoyer l'inscription</button>
+      <button type="submit">Envoyer</button>
     </form>
-  </div>
 
-  <script>
-    document.getElementById("form-inscription").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const formData = new FormData(e.target);
-      fetch("https://script.google.com/macros/s/AKfycbzTKd0eSzSQzBmeKNhCe4Cfxq2e75ArfJY6tIl0hes-1TWFcN15jBd86RSHksU5afMjUA/exec", {
-        method: "POST",
-        body: formData
-      })
-      .then(response => response.text())
-      .then(data => alert(data))
-      .catch(error => alert("Erreur : " + error));
-    });
-  </script>
-</body>
+    <script>
+      document.getElementById("form-inscription").addEventListener("submit", function(e) {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        fetch("https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec", {
+          method: "POST",
+          body: formData
+        })
+        .then(response => response.text())
+        .then(data => alert(data))
+        .catch(error => alert("Erreur : " + error));
+      });
+    </script>
+  </body>
 </html>
