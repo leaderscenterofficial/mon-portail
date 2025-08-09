@@ -2,23 +2,116 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Inscription - Leaders Center</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #f0f4f8, #d9e2ec);
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 40px auto;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .link-button {
+      display: inline-block;
+      margin-bottom: 20px;
+      padding: 10px 20px;
+      background-color: #7f8c8d;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+    }
+
+    .link-button:hover {
+      background-color: #5d6d7e;
+    }
+
+    h2 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: 600;
+      color: #34495e;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    select[multiple] {
+      height: auto;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    button {
+      margin-top: 30px;
+      width: 100%;
+      padding: 12px;
+      background-color: #2980b9;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #1c5980;
+    }
+
+    .note {
+      font-size: 12px;
+      color: #7f8c8d;
+      margin-top: 5px;
+    }
+  </style>
 </head>
 <body>
-  <h2>Formulaire d'inscription</h2>
-  <form id="inscriptionForm">
-    <label>Nom :<br>
-      <input type="text" name="nom" required>
-    </label><br><br>
-    <label>Prénom :<br>
-      <input type="text" name="prenom" required>
-    </label><br><br>
-    <label>Âge :<br>
-      <input type="date" name="age" required>
-    </label><br><br>
-    <label>Niveau scolaire :<br>
-      <select name="niveau" required>
-        <option value="">Sélectionner</option>
+  <div class="container">
+    <a href="index.html" class="link-button">← Retour au menu principal</a>
+
+    <h2>Formulaire d'inscription</h2>
+    <form id="inscriptionForm">
+      <label for="nom">Nom :</label>
+      <input type="text" id="nom" name="nom" required />
+
+      <label for="prenom">Prénom :</label>
+      <input type="text" id="prenom" name="prenom" required />
+
+      <label for="dob">Date de naissance :</label>
+      <input type="date" id="dob" name="dob" required />
+
+      <label for="niveau">Niveau scolaire :</label>
+      <select id="niveau" name="niveau" required>
+        <option value="">-- Sélectionner --</option>
+        <option>Pré-scolaire</option>
         <option>1AP</option>
         <option>2AP</option>
         <option>3AP</option>
@@ -29,32 +122,112 @@
         <option>2AC</option>
         <option>3AC</option>
         <option>TC</option>
-        <option>1Bac</option>
-        <option>2Bac</option>
+        <option>1 Bac</option>
+        <option>2 Bac</option>
         <option>Supérieur</option>
-        <option>employé</option>
+        <option>Adulte</option>
         <option>Free</option>
+        <option>Employé</option>
         <option>Autre</option>
       </select>
-    </label><br><br>
-    <label>Matières (plusieurs choix possibles) :<br>
-      <select name="matieres" multiple size="6" required>
+
+      <label for="matieres">Matières :</label>
+      <select id="matieres" name="matieres" multiple size="6" required>
         <option>Maths</option>
         <option>SVT</option>
-        <option>PC</option>
+        <option>Physique</option>
         <option>Français</option>
         <option>Anglais</option>
-        <option>Summer Camp</option>
-        <option>Echec</option>
         <option>Arabe</option>
-        <option>Education islamique</option>
-        <option>Hist-geo</option>
-        <option>philosophie</option>
-        <option>concours Etu-sup</option>
-        <option>calcul mental</option>
+        <option>Informatique</option>
+        <option>Philosophie</option>
+        <option>Éducation islamique</option>
+        <option>Histoire-Géo</option>
+        <option>Summer Camp</option>
+        <option>Échecs</option>
+        <option>Concours Études sup</option>
+        <option>Calcul mental</option>
       </select>
-    </label><br><br>
-    <button type="submit">Envoyer</button>
-  </form>
+      <div class="note">Maintenez Ctrl (Windows) ou Cmd (Mac) pour sélectionner plusieurs matières.</div>
+
+      <label for="prix_initial">Prix initial :</label>
+      <input type="number" id="prix_initial" name="prix_initial" required />
+
+      <label for="remise">Remise (%) :</label>
+      <input type="number" id="remise" name="remise" required />
+
+      <label for="prix_final">Prix final :</label>
+      <input type="number" id="prix_final" name="prix_final" readonly />
+
+      <label>Paiements mensuels :</label>
+      <div class="grid">
+        <input type="number" name="Janvier" placeholder="Janvier" />
+        <input type="number" name="Février" placeholder="Février" />
+        <input type="number" name="Mars" placeholder="Mars" />
+        <input type="number" name="Avril" placeholder="Avril" />
+        <input type="number" name="Mai" placeholder="Mai" />
+        <input type="number" name="Juin" placeholder="Juin" />
+        <input type="number" name="Juillet" placeholder="Juillet" />
+        <input type="number" name="Août" placeholder="Août" />
+        <input type="number" name="Septembre" placeholder="Septembre" />
+        <input type="number" name="Octobre" placeholder="Octobre" />
+        <input type="number" name="Novembre" placeholder="Novembre" />
+        <input type="number" name="Décembre" placeholder="Décembre" />
+      </div>
+
+      <button type="submit">Envoyer</button>
+    </form>
+  </div>
+<!-- ... tout le code HTML reste identique ... -->
+
+<script>
+  const prixInitialInput = document.getElementById("prix_initial");
+  const remiseInput = document.getElementById("remise");
+  const prixFinalInput = document.getElementById("prix_final");
+
+  function calculerPrixFinal() {
+    const prixInitial = parseFloat(prixInitialInput.value) || 0;
+    const remisePourcent = parseFloat(remiseInput.value) || 0;
+    const remiseMontant = prixInitial * (remisePourcent / 100);
+    const prixFinal = prixInitial - remiseMontant;
+    prixFinalInput.value = prixFinal > 0 ? prixFinal.toFixed(2) : "0.00";
+  }
+
+  prixInitialInput.addEventListener("input", calculerPrixFinal);
+  remiseInput.addEventListener("input", calculerPrixFinal);
+
+  document.getElementById("inscriptionForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    const form = event.target;
+    const formData = new FormData(form);
+
+    const matieresSelect = document.getElementById("matieres");
+    const selectedMatieres = Array.from(matieresSelect.selectedOptions)
+      .map(opt => opt.value)
+      .join(", ");
+    formData.append("matieres_concat", selectedMatieres);
+
+    // ✅ Ajout manuel du champ prix_final
+    formData.append("prix_final", prixFinalInput.value);
+
+    fetch("https://script.google.com/macros/s/AKfycbzTKd0eSzSQzBmeKNhCe4Cfxq2e75ArfJY6tIl0hes-1TWFcN15jBd86RSHksU5afMjUA/exec", {
+      method: "POST",
+      body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+      alert(data);
+      form.reset();
+      prixFinalInput.value = "";
+    })
+    .catch(error => {
+      console.error("Erreur :", error);
+      alert("❌ Une erreur est survenue.");
+    });
+  });
+</script>
+
+
+  
 </body>
 </html>
