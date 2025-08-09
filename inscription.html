@@ -53,8 +53,8 @@
       gap: 10px;
     }
 
-    button {
-      margin-top: 30px;
+    button, .link-button {
+      margin-top: 20px;
       width: 100%;
       padding: 12px;
       background-color: #2980b9;
@@ -63,10 +63,13 @@
       border-radius: 6px;
       font-size: 16px;
       cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
       transition: background-color 0.3s ease;
     }
 
-    button:hover {
+    button:hover, .link-button:hover {
       background-color: #1c5980;
     }
 
@@ -79,7 +82,32 @@
 </head>
 <body>
   <div class="container">
+    <a href="index.html" class="link-button">← Retour au menu principal</a>
+
     <h2>Formulaire d'inscription</h2>
     <form id="inscriptionForm" onsubmit="handleSubmit(event)">
       <label for="nom">Nom :</label>
-      <input type="text" id="nom"
+      <input type="text" id="nom" name="nom" required />
+
+      <label for="prenom">Prénom :</label>
+      <input type="text" id="prenom" name="prenom" required />
+
+      <label for="dob">Date de naissance :</label>
+      <input type="date" id="dob" name="dob" required />
+
+      <label for="niveau">Niveau scolaire :</label>
+      <select id="niveau" name="niveau" required>
+        <option value="">-- Sélectionner --</option>
+        <option>Pré-scolaire</option>
+        <option>1AP</option>
+        <option>2AP</option>
+        <option>3AP</option>
+        <option>4AP</option>
+        <option>5AP</option>
+        <option>6AP</option>
+        <option>1AC</option>
+        <option>2AC</option>
+        <option>3AC</option>
+        <option>TC</option>
+        <option>1 Bac</option>
+        <option>2 Bac</option>
