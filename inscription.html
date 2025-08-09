@@ -98,7 +98,7 @@
     <a href="index.html" class="link-button">← Retour au menu principal</a>
 
     <h2>Formulaire d'inscription</h2>
-    <form id="inscriptionForm" onsubmit="handleSubmit(event)">
+    <form id="inscriptionForm">
       <label for="nom">Nom :</label>
       <input type="text" id="nom" name="nom" required />
 
@@ -195,25 +195,32 @@
     prixInitialInput.addEventListener("input", calculerPrixFinal);
     remiseInput.addEventListener("input", calculerPrixFinal);
 
-    function handleSubmit(event) {
+    document.getElementById("inscriptionForm").addEventListener("submit", function(event) {
       event.preventDefault();
-      const form = document.getElementById("inscriptionForm");
+      const form = event.target;
+      const formData = new FormData(form);
 
       const matieresSelect = document.getElementById("matieres");
       const selectedMatieres = Array.from(matieresSelect.selectedOptions)
         .map(opt => opt.value)
         .join(", ");
+      formData.append("matieres_concat", selectedMatieres);
 
-      const hiddenInput = document.createElement("input");
-      hiddenInput.type = "hidden";
-      hiddenInput.name = "matieres_concat";
-      hiddenInput.value = selectedMatieres;
-      form.appendChild(hiddenInput);
-
-      // Ajoute ici ton code d'envoi vers Google Sheets ou Apps Script
-      console.log("Formulaire prêt à être envoyé !");
-      form.submit();
-    }
+      fetch("https://script.google.com/macros/s/AKfycbzTKd0eSzSQzBmeKNhCe4Cfxq2e75ArfJY6tIl0hes-1TWFcN15jBd86RSHksU5afMjUA/exec", {
+        method: "POST",
+        body: formData
+      })
+      .then(response => response.text())
+      .then(data => {
+        alert(data);
+        form.reset();
+        prixFinalInput.value = "";
+      })
+      .catch(error => {
+        console.error("Erreur :", error);
+        alert("❌ Une erreur est survenue.");
+      });
+    });
   </script>
 </body>
 </html>
