@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Inscription - Leaders Center</title>
+</head>
+<body>
+  <h2>Formulaire d'inscription</h2>
+  <form id="inscriptionForm">
+    <label>Nom :<br>
+      <input type="text" name="nom" required>
+    </label><br><br>
+    <label>Prénom :<br>
+      <input type="text" name="prenom" required>
+    </label><br><br>
+    <label>Âge :<br>
+      <input type="date" name="age" required>
+    </label><br><br>
+    <label>Niveau scolaire :<br>
+      <select name="niveau" required>
+        <option value="">Sélectionner</option>
+        <option>1AP</option>
+        <option>2AP</option>
+        <option>3AP</option>
+        <option>4AP</option>
+        <option>5AP</option>
+        <option>6AP</option>
+        <option>1AC</option>
+        <option>2AC</option>
+        <option>3AC</option>
+        <option>TC</option>
+        <option>1Bac</option>
+        <option>2Bac</option>
+        <option>Supérieur</option>
+        <option>employé</option>
+        <option>Free</option>
+        <option>Autre</option>
+      </select>
+    </label><br><br>
+    <label>Matières (plusieurs choix possibles) :<br>
+      <select name="matieres" multiple size="6" required>
+        <option>Maths</option>
+        <option>SVT</option>
+        <option>PC</option>
+        <option>Français</option>
+        <option>Anglais</option>
+        <option>Summer Camp</option>
+        <option>Echec</option>
+        <option>Arabe</option>
+        <option>Education islamique</option>
+        <option>Hist-geo</option>
+        <option>philosophie</option>
+        <option>concours Etu-sup</option>
+        <option>calcul mental</option>
+      </select>
+    </label><br><br>
+    <button type="submit">Envoyer</button>
+  </form>
+</body>
+</html>
