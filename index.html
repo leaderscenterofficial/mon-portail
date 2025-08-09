@@ -72,16 +72,37 @@
     Inscription
   </button>
       <button onclick="showForm('absence_primaire')">Absence Primaire</button>
-    <a href="inscription.html" target="_blank" class="btn">
-  Inscription
-</a>
+  <style>
+  .btn {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 8px;
+    text-decoration: none;
+    text-align: center;
+  }
+  
+  .btn:hover {
+    background-color: #0056b3;
+  }
+</style>
+
+<div class="menu">
+  <a href="inscription.html" class="btn">
+    Inscription
+  </a>
+
+  <!-- autre liens/boutons -->
+
+
     
   <button onclick="showForm('absence_college')">Absence Collège</button>
   <button onclick="showForm('absence_lycée')">Absence Lycée</button>
   <button onclick="showForm('absence_adulte')">Absence Adulte</button>
   <button onclick="showForm('professeur')">Professeur</button>
 </div>
-
+    
 <!-- Zone de formulaire -->
 <div id="formContainer" style="margin-top:40px; width:80%; max-width:600px;"></div>
 
