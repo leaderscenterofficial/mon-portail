@@ -12,7 +12,7 @@
     }
 
     .container {
-      max-width: 600px;
+      max-width: 700px;
       margin: auto;
       background-color: #fff;
       padding: 30px;
@@ -42,21 +42,6 @@
       border-radius: 4px;
     }
 
-    button {
-      margin-top: 20px;
-      padding: 12px;
-      background-color: #007BFF;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #0056b3;
-    }
-
     .btn-retour {
       display: inline-block;
       background-color: #ccc;
@@ -73,39 +58,141 @@
       background-color: #bbb;
     }
 
-    .retour-container {
-      text-align: center;
+    button {
+      margin-top: 20px;
+      padding: 12px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 5px;
+    }
+
+    .checkbox-group label {
+      font-weight: normal;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="retour-container">
+    <div style="text-align: center;">
       <a href="index.html" class="btn-retour">← Retour au menu principal</a>
     </div>
 
     <h1>Formulaire d'inscription</h1>
 
-    <form action="traitement.php" method="post">
+    <form id="form-inscription">
+      <!-- Nom -->
       <label for="nom">Nom :</label>
       <input type="text" id="nom" name="nom" required>
 
+      <!-- Prénom -->
       <label for="prenom">Prénom :</label>
       <input type="text" id="prenom" name="prenom" required>
 
-      <label for="email">Email :</label>
-      <input type="email" id="email" name="email" required>
+      <!-- Date de naissance -->
+      <label for="date_naissance">Date de naissance :</label>
+      <input type="date" id="date_naissance" name="date_naissance" required>
 
-      <label for="formation">Formation :</label>
-      <select id="formation" name="formation" required>
-        <option value="">-- Choisir une formation --</option>
-        <option value="langues">Langues</option>
-        <option value="developpement">Développement personnel</option>
-        <option value="informatique">Informatique</option>
+      <!-- Niveau scolaire -->
+      <label for="niveau">Niveau scolaire :</label>
+      <select id="niveau" name="niveau" required>
+        <option value="">-- Choisir --</option>
+        <option value="pre-scolaire">Pré-scolaire</option>
+        <option value="1AP">1AP</option>
+        <option value="2AP">2AP</option>
+        <option value="3AP">3AP</option>
+        <option value="4AP">4AP</option>
+        <option value="5AP">5AP</option>
+        <option value="6AP">6AP</option>
+        <option value="1AC">1AC</option>
+        <option value="2AC">2AC</option>
+        <option value="3AC">3AC</option>
+        <option value="TC">TC</option>
+        <option value="1 Bac">1 Bac</option>
+        <option value="2 Bac">2 Bac</option>
+        <option value="supérieur">Supérieur</option>
+        <option value="adulte">Adulte</option>
+        <option value="free">Free</option>
+        <option value="employé">Employé</option>
+        <option value="autre">Autre</option>
+      </select>
+
+      <!-- Matières -->
+      <label>Matières :</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="matieres" value="Français"> Français</label>
+        <label><input type="checkbox" name="matieres" value="Anglais"> Anglais</label>
+        <label><input type="checkbox" name="matieres" value="Maths"> Maths</label>
+        <label><input type="checkbox" name="matieres" value="Physique"> Physique</label>
+        <label><input type="checkbox" name="matieres" value="SVT"> SVT</label>
+        <label><input type="checkbox" name="matieres" value="Arabe"> Arabe</label>
+        <label><input type="checkbox" name="matieres" value="Informatique"> Informatique</label>
+        <!-- Ajoute d'autres matières si besoin -->
+      </div>
+
+      <!-- Prix initial -->
+      <label for="prix_initial">Prix initial (DH) :</label>
+      <input type="number" id="prix_initial" name="prix_initial" required>
+
+      <!-- Remise -->
+      <label for="remise">Remise (%) :</label>
+      <input type="number" id="remise" name="remise" required>
+
+      <!-- Prix après remise -->
+      <label for="prix_final">Prix après remise (DH) :</label>
+      <input type="number" id="prix_final" name="prix_final" readonly>
+
+      <!-- Statut de paiement -->
+      <label for="mois1">Mois 1 :</label>
+      <select id="mois1" name="mois1" required>
+        <option value="">-- Choisir --</option>
+        <option value="payé">Payé</option>
+        <option value="non payé">Non payé</option>
       </select>
 
       <button type="submit">S'inscrire</button>
     </form>
   </div>
+
+  <script>
+    // Calcul automatique du prix après remise
+    const prixInitial = document.getElementById('prix_initial');
+    const remise = document.getElementById('remise');
+    const prixFinal = document.getElementById('prix_final');
+
+    function calculerPrixFinal() {
+      const initial = parseFloat(prixInitial.value) || 0;
+      const discount = parseFloat(remise.value) || 0;
+      const final = initial - (initial * discount / 100);
+      prixFinal.value = final.toFixed(2);
+    }
+
+    prixInitial.addEventListener('input', calculerPrixFinal);
+    remise.addEventListener('input', calculerPrixFinal);
+
+    // Regrouper les matières sélectionnées en une seule chaîne
+    document.getElementById('form-inscription').addEventListener('submit', function(e) {
+      const checkboxes = document.querySelectorAll('input[name="matieres"]:checked');
+      const selected = Array.from(checkboxes).map(cb => cb.value).join(', ');
+      const hiddenInput = document.createElement('input');
+      hiddenInput.type = 'hidden';
+      hiddenInput.name = 'matieres_concat';
+      hiddenInput.value = selected;
+      this.appendChild(hiddenInput);
+    });
+  </script>
 </body>
 </html>
