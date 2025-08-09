@@ -1,70 +1,198 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <base target="_top">
-    <style>
-      body { font-family: Arial, sans-serif; padding: 20px; }
-      label { display: block; margin-top: 10px; font-weight: bold; }
-      select { margin-bottom: 10px; }
-    </style>
-  </head>
-  <body>
-    <h2>Formulaire d'inscription</h2>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Inscription - Leaders Center</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input, select {
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .btn-retour {
+      display: inline-block;
+      background-color: #ccc;
+      color: #333;
+      padding: 10px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+      margin-bottom: 20px;
+    }
+
+    .btn-retour:hover {
+      background-color: #bbb;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 5px;
+    }
+
+    .checkbox-group label {
+      font-weight: normal;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div style="text-align: center;">
+      <a href="index.html" class="btn-retour">← Retour au menu principal</a>
+    </div>
+
+    <h1>Formulaire d'inscription</h1>
+
     <form id="form-inscription">
-      <label>Nom:</label>
-      <input type="text" name="nom" required>
+      <!-- Nom -->
+      <label for="nom">Nom :</label>
+      <input type="text" id="nom" name="nom" required>
 
-      <label>Prénom:</label>
-      <input type="text" name="prenom" required>
+      <!-- Prénom -->
+      <label for="prenom">Prénom :</label>
+      <input type="text" id="prenom" name="prenom" required>
 
-      <label>Date de naissance:</label>
-      <input type="date" name="date_naissance" required>
+      <!-- Date de naissance -->
+      <label for="date_naissance">Date de naissance :</label>
+      <input type="date" id="date_naissance" name="date_naissance" required>
 
-      <label>Niveau scolaire:</label>
-      <input type="text" name="niveau" required>
+      <!-- Niveau scolaire -->
+      <label for="niveau">Niveau scolaire :</label>
+      <select id="niveau" name="niveau" required>
+        <option value="">-- Choisir --</option>
+        <option value="pre-scolaire">Pré-scolaire</option>
+        <option value="1AP">1AP</option>
+        <option value="2AP">2AP</option>
+        <option value="3AP">3AP</option>
+        <option value="4AP">4AP</option>
+        <option value="5AP">5AP</option>
+        <option value="6AP">6AP</option>
+        <option value="1AC">1AC</option>
+        <option value="2AC">2AC</option>
+        <option value="3AC">3AC</option>
+        <option value="TC">TC</option>
+        <option value="1 Bac">1 Bac</option>
+        <option value="2 Bac">2 Bac</option>
+        <option value="supérieur">Supérieur</option>
+        <option value="adulte">Adulte</option>
+        <option value="free">Free</option>
+        <option value="employé">Employé</option>
+        <option value="autre">Autre</option>
+      </select>
 
-      <label>Matières:</label>
-      <input type="text" name="matieres_concat" required>
+      <!-- Matières -->
+      <label>Matières :</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="matieres" value="Français"> Français</label>
+        <label><input type="checkbox" name="matieres" value="Anglais"> Anglais</label>
+        <label><input type="checkbox" name="matieres" value="Maths"> Maths</label>
+        <label><input type="checkbox" name="matieres" value="Physique"> Physique</label>
+        <label><input type="checkbox" name="matieres" value="SVT"> SVT</label>
+        <label><input type="checkbox" name="matieres" value="Arabe"> Arabe</label>
+        <label><input type="checkbox" name="matieres" value="Informatique"> Informatique</label>
+        <!-- Ajoute d'autres matières si besoin -->
+      </div>
 
-      <label>Prix initial:</label>
-      <input type="number" name="prix_initial" required>
+      <!-- Prix initial -->
+      <label for="prix_initial">Prix initial (DH) :</label>
+      <input type="number" id="prix_initial" name="prix_initial" required>
 
-      <label>Remise:</label>
-      <input type="number" name="remise">
+      <!-- Remise -->
+      <label for="remise">Remise (%) :</label>
+      <input type="number" id="remise" name="remise" required>
 
-      <label>Prix final:</label>
-      <input type="number" name="prix_final" required>
+      <!-- Prix après remise -->
+      <label for="prix_final">Prix après remise (DH) :</label>
+      <input type="number" id="prix_final" name="prix_final" readonly>
 
-      <h3>Suivi des paiements mensuels</h3>
-      <script>
-        const mois = [
-          "janvier", "fevrier", "mars", "avril", "mai", "juin",
-          "juillet", "aout", "septembre", "octobre", "novembre", "decembre"
-        ];
-        mois.forEach(m => {
-          document.write(`<label>${m.charAt(0).toUpperCase() + m.slice(1)}:</label>`);
-          document.write(`<select name="mois_${m}">
-            <option value="Non payé">Non payé</option>
-            <option value="Payé">Payé</option>
-          </select>`);
-        });
-      </script>
+      <!-- Statut de paiement -->
+      <label for="mois1">Mois 1 :</label>
+      <select id="mois1" name="mois1" required>
+        <option value="">-- Choisir --</option>
+        <option value="payé">Payé</option>
+        <option value="non payé">Non payé</option>
+      </select>
 
-      <button type="submit">Envoyer</button>
+      <button type="submit">S'inscrire</button>
     </form>
+  </div>
 
-    <script>
-      document.getElementById("form-inscription").addEventListener("submit", function(e) {
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        fetch("https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec", {
-          method: "POST",
-          body: formData
-        })
-        .then(response => response.text())
-        .then(data => alert(data))
-        .catch(error => alert("Erreur : " + error));
-      });
-    </script>
-  </body>
+  <script>
+    // Calcul automatique du prix après remise
+    const prixInitial = document.getElementById('prix_initial');
+    const remise = document.getElementById('remise');
+    const prixFinal = document.getElementById('prix_final');
+
+    function calculerPrixFinal() {
+      const initial = parseFloat(prixInitial.value) || 0;
+      const discount = parseFloat(remise.value) || 0;
+      const final = initial - (initial * discount / 100);
+      prixFinal.value = final.toFixed(2);
+    }
+
+    prixInitial.addEventListener('input', calculerPrixFinal);
+    remise.addEventListener('input', calculerPrixFinal);
+
+    // Regrouper les matières sélectionnées en une seule chaîne
+    document.getElementById('form-inscription').addEventListener('submit', function(e) {
+      const checkboxes = document.querySelectorAll('input[name="matieres"]:checked');
+      const selected = Array.from(checkboxes).map(cb => cb.value).join(', ');
+      const hiddenInput = document.createElement('input');
+      hiddenInput.type = 'hidden';
+      hiddenInput.name = 'matieres_concat';
+      hiddenInput.value = selected;
+      this.appendChild(hiddenInput);
+    });
+  </script>
+</body>
 </html>
