@@ -206,6 +206,20 @@
         .join(", ");
       formData.append("matieres_concat", selectedMatieres);
 
+
+formData.append("prix_initial", prixInitialInput.value);
+formData.append("remise", remiseInput.value);
+formData.append("prix_final", prixFinalInput.value);
+const mois = [
+  "Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
+  "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
+];
+
+mois.forEach(m => {
+  const input = document.querySelector(`input[name="${m}"]`);
+  formData.append(m, input?.value || "");
+});
+
       fetch("https://script.google.com/macros/s/AKfycbzTKd0eSzSQzBmeKNhCe4Cfxq2e75ArfJY6tIl0hes-1TWFcN15jBd86RSHksU5afMjUA/exec", {
         method: "POST",
         body: formData
