@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Visualisation des données</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 20px;
+      background-color: #f9f9f9;
+    }
+    h2 {
+      color: #2c3e50;
+    }
+    select {
+      padding: 8px;
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #34495e;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <h2>📊 Visualisation des données</h2>
+  <label for="sheetSelect">Choisir la feuille :</label>
+  <select id="sheetSelect" onchange="loadData()">
+    <option value="inscription">Inscription</option>
+    <option value="logs">Logs</option>
+  </select>
+
+  <div id="tableContainer">Chargement...</div>
+
+  <script>
+    function loadData() {
+      const sheetName = document.getElementById("sheetSelect").value;
+      google.script.run.withSuccessHandler(renderTable).getSheetData(sheetName);
+    }
+
+    function renderTable(data) {
+      if (!data || data.length === 0) {
+        document.getElementById("tableContainer").innerHTML = "<p>Aucune donnée disponible.</p>";
+        return;
+      }
+
+      let html = "<table><thead><tr>";
+      data[0].forEach(header => html += `<th>${header}</th>`);
+      html += "</tr></thead><tbody>";
+
+      for (let i = 1; i < data.length; i++) {
+        html += "<tr>";
+        data[i].forEach(cell => html += `<td>${cell}</td>`);
+        html += "</tr>";
+      }
+
+      html += "</tbody></table>";
+      document.getElementById("tableContainer").innerHTML = html;
+    }
+
+    window.onload = loadData;
+  </script>
+</body>
+</html>
