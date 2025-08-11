@@ -1,78 +1,109 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
   <title>Visualisation des données</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 20px;
-      background-color: #f9f9f9;
-    }
-    h2 {
-      color: #2c3e50;
-    }
-    select {
-      padding: 8px;
-      margin-bottom: 20px;
-      font-size: 16px;
+      font-family: Arial, sans-serif;
+      padding: 20px;
     }
     table {
-      width: 100%;
       border-collapse: collapse;
-      background-color: white;
+      width: 100%;
+      margin-top: 20px;
     }
     th, td {
-      border: 1px solid #ddd;
+      border: 1px solid #ccc;
       padding: 8px;
-      text-align: left;
+      text-align: center;
     }
     th {
-      background-color: #34495e;
-      color: white;
-    }
-    tr:nth-child(even) {
       background-color: #f2f2f2;
+    }
+    .paid {
+      background-color: #d4edda;
+    }
+    .unpaid {
+      background-color: #f8d7da;
     }
   </style>
 </head>
 <body>
-  <h2>📊 Visualisation des données</h2>
-  <label for="sheetSelect">Choisir la feuille :</label>
-  <select id="sheetSelect" onchange="loadData()">
-    <option value="inscription">Inscription</option>
-    <option value="logs">Logs</option>
-  </select>
+  <h1>📊 Visualisation des logs de soumission</h1>
 
-  <div id="tableContainer">Chargement...</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Horodatage</th>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Date de naissance</th>
+        <th>Niveau</th>
+        <th>Matières</th>
+        <th>Prix initial</th>
+        <th>Remise</th>
+        <th>Prix final</th>
+        <th>Janvier</th>
+        <th>Février</th>
+        <th>Mars</th>
+        <th>Avril</th>
+        <th>Mai</th>
+        <th>Juin</th>
+        <th>Juillet</th>
+        <th>Août</th>
+        <th>Septembre</th>
+        <th>Octobre</th>
+        <th>Novembre</th>
+        <th>Décembre</th>
+      </tr>
+    </thead>
+    <tbody id="logsTable"></tbody>
+  </table>
 
   <script>
-    function loadData() {
-      const sheetName = document.getElementById("sheetSelect").value;
-      google.script.run.withSuccessHandler(renderTable).getSheetData(sheetName);
-    }
+    fetch("https://script.google.com/macros/s/AKfycbzTKd0eSzSQzBmeKNhCe4Cfxq2e75ArfJY6tIl0hes-1TWFcN15jBd86RSHksU5afMjUA/exec?page=logs_json")
+      .then(response => response.json())
+      .then(data => {
+        const table = document.getElementById("logsTable");
+        data.forEach(entry => {
+          const row = document.createElement("tr");
 
-    function renderTable(data) {
-      if (!data || data.length === 0) {
-        document.getElementById("tableContainer").innerHTML = "<p>Aucune donnée disponible.</p>";
-        return;
-      }
+          // Fonction pour colorer les cellules de paiement
+          const formatCell = (val) => {
+            const paid = val.toString().trim().toLowerCase() === "payé";
+            return `<td class="${paid ? 'paid' : 'unpaid'}">${val}</td>`;
+          };
 
-      let html = "<table><thead><tr>";
-      data[0].forEach(header => html += `<th>${header}</th>`);
-      html += "</tr></thead><tbody>";
-
-      for (let i = 1; i < data.length; i++) {
-        html += "<tr>";
-        data[i].forEach(cell => html += `<td>${cell}</td>`);
-        html += "</tr>";
-      }
-
-      html += "</tbody></table>";
-      document.getElementById("tableContainer").innerHTML = html;
-    }
-
-    window.onload = loadData;
+          row.innerHTML = `
+            <td>${entry["Horodatage"]}</td>
+            <td>${entry["Nom"]}</td>
+            <td>${entry["Prénom"]}</td>
+            <td>${entry["Date de naissance"]}</td>
+            <td>${entry["Niveau"]}</td>
+            <td>${entry["Matières"]}</td>
+            <td>${entry["Prix initial"]}</td>
+            <td>${entry["Remise"]}</td>
+            <td>${entry["Prix final"]}</td>
+            ${formatCell(entry["Janvier"])}
+            ${formatCell(entry["Février"])}
+            ${formatCell(entry["Mars"])}
+            ${formatCell(entry["Avril"])}
+            ${formatCell(entry["Mai"])}
+            ${formatCell(entry["Juin"])}
+            ${formatCell(entry["Juillet"])}
+            ${formatCell(entry["Août"])}
+            ${formatCell(entry["Septembre"])}
+            ${formatCell(entry["Octobre"])}
+            ${formatCell(entry["Novembre"])}
+            ${formatCell(entry["Décembre"])}
+          `;
+          table.appendChild(row);
+        });
+      });
   </script>
 </body>
 </html>
+
+
+
