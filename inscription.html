@@ -210,6 +210,21 @@
 formData.append("prix_initial", prixInitialInput.value);
 formData.append("remise", remiseInput.value);
 formData.append("prix_final", prixFinalInput.value);
+
+const statutPaiementInput = document.getElementById("statut_paiement");
+formData.append("statut_paiement", statutPaiementInput.value);
+
+
+<label for="statut_paiement">Statut de paiement :</label>
+<select id="statut_paiement" name="statut_paiement" required>
+  <option value="">-- Sélectionner --</option>
+  <option>Payé</option>
+  <option>Partiel</option>
+  <option>Non payé</option>
+</select>
+
+<label>Paiements mensuels :</label>
+
 const mois = [
   "Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
   "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
