@@ -28,8 +28,51 @@
 
   <a href="visualisation.html" class="btn">📊 Visualiser les données</a>
 <a href="index.html" class="btn">🏠 Retour au Portail</a>
-  
+  <button id="debugButton" style="background:#ffc107; color:#000; padding:8px 16px; border:none; border-radius:5px; cursor:pointer;">
+  🧪 Mode debug
+</button>
+<pre id="debugOutput" style="margin-top:10px; background:#f8f9fa; padding:10px; border:1px solid #ccc; border-radius:5px; max-height:300px; overflow:auto;"></pre>
 
   <!-- Tu peux ajouter ici d'autres outils : export, stats, etc. -->
+
+<script>
+  document.getElementById("debugButton").addEventListener("click", () => {
+    const formData = new FormData(); // ← vide si aucun formulaire visible
+
+    // Exemple de données fictives pour test (à adapter selon ton formulaire réel)
+    formData.append("nom", "Test");
+    formData.append("prenom", "Debug");
+    formData.append("dob", "2000-01-01");
+    formData.append("niveau", "Terminale");
+    formData.append("matieres_concat", "Maths, Physique");
+    formData.append("prix_initial", "1000");
+    formData.append("remise", "200");
+    formData.append("prix_final", "800");
+    formData.append("statut_paiement", "Non payé");
+
+    // Ajouter les mois
+    const mois = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"];
+    mois.forEach(m => formData.append(m, "0"));
+
+    fetch("https://script.google.com/macros/s/AKfycbzTKd0eSzSQzBmeKNhCe4Cfxq2e75ArfJY6tIl0hes-1TWFcN15jBd86RSHksU5afMjUA/exec?debug=true", {
+      method: "POST",
+      body: formData
+    })
+    .then(response => response.json())
+.then(data => {
+  const output = document.getElementById("debugOutput");
+  output.textContent = "✅ Données reçues :\n\n" + JSON.stringify(data, null, 2);
+  output.style.borderColor = "#28a745"; // vert
+})
+.catch(error => {
+  const output = document.getElementById("debugOutput");
+  output.textContent = "❌ Erreur : " + error;
+  output.style.borderColor = "#dc3545"; // rouge
+});
+
+    });
+  });
+</script>
+
 </body>
 </html>
